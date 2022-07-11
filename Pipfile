@@ -29,6 +29,7 @@ matplotlib = "*"
 tensorboard = "*"
 jupyterthemes = "*"
 seaborn = "*"
+graphviz = "*"
 
 [dev-packages]
 
