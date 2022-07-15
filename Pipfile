@@ -30,6 +30,7 @@ tensorboard = "*"
 jupyterthemes = "*"
 seaborn = "*"
 graphviz = "*"
+xgboost = "*"
 
 [dev-packages]
 
