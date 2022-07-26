@@ -1,3 +1,9 @@
 data/
 
+# GAN
 *_img/
+
+
+# Unet
+checkpoint/
+log/

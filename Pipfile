@@ -31,6 +31,7 @@ jupyterthemes = "*"
 seaborn = "*"
 graphviz = "*"
 xgboost = "*"
+tqdm = "*"
 
 [dev-packages]
 
