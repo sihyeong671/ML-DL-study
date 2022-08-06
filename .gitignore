@@ -1,9 +1,10 @@
+__pycache__/
+
 data/
 
-# GAN
 *_img/
 
-
-# Unet
 checkpoint/
 log/
+
+*_checkpoint/
