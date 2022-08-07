@@ -5,33 +5,18 @@ name = "pypi"
 
 [[source]]
 url = "https://download.pytorch.org/whl/cu116"
-verify_ssl = true
-name = "downloadpytorch"
-
-[[source]]
-url = "https://download.pytorch.org/whl/cu116"
-verify_ssl = true
-name = "downloadpytorch"
-
-[[source]]
-url = "https://download.pytorch.org/whl/cu116"
-verify_ssl = true
-name = "downloadpytorch"
+verify_ssl = false
+name = "pytorch"
 
 [packages]
+torch = {version = "*", index = "pytorch"}
+torchvision = {version = "*", index = "pytorch"}
+torchaudio = {version = "*", index = "pytorch"}
 jupyter = "*"
-torch = "*"
-torchvision = "*"
-torchaudio = "*"
 scikit-learn = "*"
-pandas = "*"
 matplotlib = "*"
-tensorboard = "*"
-jupyterthemes = "*"
-seaborn = "*"
-graphviz = "*"
-xgboost = "*"
-tqdm = "*"
+pandas = "*"
+imageio = "*"
 
 [dev-packages]
 
