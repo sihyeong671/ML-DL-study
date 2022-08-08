@@ -8,4 +8,4 @@
 - [DCGAN](https://github.com/sihyeong671/ML-DL-study/blob/main/DL/GAN/DCGAN.ipynb) / [Blog Posting](https://blog.naver.com/bshlab671/222817498713)
 - FCN / [Blog Posting](https://blog.naver.com/bshlab671/222835550599)
 - [UNet](https://github.com/sihyeong671/ML-DL-study/blob/main/DL/Unet/Unet.ipynb) / [Blog Posting](https://blog.naver.com/bshlab671/222830843050)
-- [Pix2Pix](https://github.com/sihyeong671/ML-DL-study/tree/main/DL/pix2pix) / [Blog Posting]()
+- [Pix2Pix](https://github.com/sihyeong671/ML-DL-study/tree/main/DL/pix2pix) / [Blog Posting](https://blog.naver.com/bshlab671/222842133527)
