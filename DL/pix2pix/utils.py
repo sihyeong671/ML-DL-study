@@ -87,7 +87,7 @@ class DECBR2d(nn.Module):
 
 def resize_and_randomcrop(data):
   x = data['real']
-  y = data['facade']
+  y = data['input']
   
   # B:0 C:1 H:2 W:3
   cat = torch.cat((x, y), dim=1) # channel 방향으로 합체

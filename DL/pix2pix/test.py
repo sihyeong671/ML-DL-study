@@ -53,3 +53,5 @@ for idx, data in enumerate(loader_test):
   save_img(x_, fake, y_, f'./{args.dataset}_img', idx+1, test=True)
 
 print('TEST FIN')
+
+

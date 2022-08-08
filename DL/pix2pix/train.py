@@ -1,4 +1,5 @@
 from decimal import Decimal
+from DL.pix2pix.dataset import CityscapesDataset, Edges2shoesDataset, MapsDataset
 from dataset import FacadesDataset
 from model import *
 from utils import *
@@ -12,7 +13,7 @@ from torchvision import transforms
 from torch.utils.data import DataLoader
 
 data_dirs = {
-  'edge2shoes': '../data/edges2shoes/train',
+  'edges2shoes': '../data/edges2shoes/train',
   'facades': '../data/facades/train',
   'maps': '../data/maps/train',
   'cityscapes': '../data/cityscapes/train'
@@ -41,9 +42,20 @@ transform = transforms.Compose([
 ])
 
 data_dir = data_dirs[args.dataset]
-## 
-data_train = FacadesDataset(data_dir=data_dir, transform=transform)
-loader_train = DataLoader(data_train, batch_size=args.batch_size, shuffle=True, num_workers=0)
+
+if args.dataset == 'facades':
+  data_train = FacadesDataset(data_dir=data_dir, transform=transform)
+  loader_train = DataLoader(data_train, batch_size=args.batch_size, shuffle=True, num_workers=0)
+elif args.dataset == 'edges2shoes':
+  data_train = Edges2shoesDataset(data_dir=data_dir, transform=transform)
+  loader_train = DataLoader(data_train, batch_size=args.batch_size, shuffle=True, num_workers=0)
+elif args.dataset == 'maps':
+  data_train = MapsDataset(data_dir=data_dir, transform=transform)
+  loader_train = DataLoader(data_train, batch_size=args.batch_size, shuffle=True, num_workers=0)
+elif args.dataset == 'cityscapes':
+  data_train = CityscapesDataset(data_dir=data_dir, transform=transform)
+  loader_train = DataLoader(data_train, batch_size=args.batch_size, shuffle=True, num_workers=0)
+
 
 G = Pix2Pix_G().to(DEVICE)
 D = Pix2Pix_D().to(DEVICE)
@@ -76,21 +88,21 @@ for epoch in range(1, args.n_epoch+1):
   for data in loader_train:
 
     # img resize and crop -> gpu 로 옮기고? 아니면 그전에?
-    real, facade = resize_and_randomcrop(data)
+    real, input_data = resize_and_randomcrop(data) # jittering
 
     if USE_CUDA:
       real = real.cuda()
-      facade = facade.cuda()
+      input_data = input_data.cuda()
     
-    fake_img = G(facade)
+    fake_img = G(input_data)
 
     # train D
     D.zero_grad()
 
-    D_output = D(torch.cat((real, facade), dim=1)).squeeze() # 30 30 1 -> 30 30
+    D_output = D(torch.cat((real, input_data), dim=1)).squeeze() # 30 30 1 -> 30 30
     D_real_loss = BCE_loss(D_output, torch.ones(D_output.size()).to(DEVICE))
 
-    D_output = D(torch.cat((fake_img.detach(), facade), dim=1)).squeeze()
+    D_output = D(torch.cat((fake_img.detach(), input_data), dim=1)).squeeze()
     D_fake_loss = BCE_loss(D_output, torch.zeros(D_output.size()).to(DEVICE))
 
     D_loss = (D_real_loss + D_fake_loss) / 2 # -> /2는 굳이 안해도 된다
@@ -102,7 +114,7 @@ for epoch in range(1, args.n_epoch+1):
     # train G
     G.zero_grad()
 
-    D_output = D(torch.cat((fake_img, facade), dim=1)).squeeze()
+    D_output = D(torch.cat((fake_img, input_data), dim=1)).squeeze()
     G_BCE = BCE_loss(D_output, torch.ones(D_output.size()).to(DEVICE))
     G_L1 =  L1_loss(fake_img, real)
     G_loss = G_BCE + (args.L1_lambda * G_L1)
@@ -122,9 +134,9 @@ for epoch in range(1, args.n_epoch+1):
     
     real = fn_tonumpy(fn_denorm(real, mean=0.5, std=0.5)).squeeze()
     fake = fn_tonumpy(fn_denorm(fake_img, mean=0.5, std=0.5)).squeeze()
-    facade = fn_tonumpy(fn_denorm(facade, mean=0.5, std=0.5)).squeeze()
+    input_data = fn_tonumpy(fn_denorm(input_data, mean=0.5, std=0.5)).squeeze()
 
-    save_img(real, fake, facade, f'./{args.dataset}_img', epoch)
+    save_img(real, fake, input_data, f'./{args.dataset}_img', epoch)
 
 
 hist = {
