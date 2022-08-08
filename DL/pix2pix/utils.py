@@ -97,6 +97,11 @@ def resize_and_randomcrop(data):
     transforms.RandomCrop((256, 256))
   ])
 
+  # maps data
+  # transform = transforms.Compose([
+  #   transforms.RandomCrop((512, 512))
+  # ])
+
   cat_trans= transform(cat) # resize and randomcrop
 
   x, y = torch.chunk(cat_trans, 2, dim=1) # 채널 방향으로 분리

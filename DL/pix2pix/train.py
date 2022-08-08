@@ -1,6 +1,6 @@
-from decimal import Decimal
-from DL.pix2pix.dataset import CityscapesDataset, Edges2shoesDataset, MapsDataset
-from dataset import FacadesDataset
+# import sys
+# sys.path.append('../')
+from dataset import FacadesDataset, Edges2shoesDataset, MapsDataset, CityscapesDataset
 from model import *
 from utils import *
 
@@ -26,11 +26,12 @@ DEVICE = 'cuda' if USE_CUDA else 'cpu'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', default='facades')
+parser.add_argument('--n_epoch', type=int, default=200)
 parser.add_argument('--batch_size', type=int, default=1)
+
 parser.add_argument('--lr', type=float, default=0.0002)
 parser.add_argument('--b1', type=float, default=0.5)
 parser.add_argument('--b2', type=float, default=0.999)
-parser.add_argument('--n_epoch', type=int, default=200)
 parser.add_argument('--L1_lambda', type=float, default=100.0)
 args = parser.parse_args()
 
@@ -99,7 +100,7 @@ for epoch in range(1, args.n_epoch+1):
     # train D
     D.zero_grad()
 
-    D_output = D(torch.cat((real, input_data), dim=1)).squeeze() # 30 30 1 -> 30 30
+    D_output = D(torch.cat((real, input_data), dim=1)).squeeze() # 1 30 30 -> 30 30
     D_real_loss = BCE_loss(D_output, torch.ones(D_output.size()).to(DEVICE))
 
     D_output = D(torch.cat((fake_img.detach(), input_data), dim=1)).squeeze()
