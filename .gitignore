@@ -8,3 +8,4 @@ checkpoint/
 log/
 
 *_checkpoint/
+*saved_model/

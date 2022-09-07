@@ -18,6 +18,7 @@ matplotlib = "*"
 pandas = "*"
 imageio = "*"
 torchsummary = "*"
+tqdm = "*"
 
 [dev-packages]
 
