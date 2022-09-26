@@ -3,6 +3,7 @@
 > Pytorch를 이용한 논문 구현
 ### General
 - BatchNorm / [Blog Posting](https://blog.naver.com/bshlab671/222854640018)
+- Adam / []
 
 ### Generative Model
 - [GAN](https://github.com/sihyeong671/ML-DL-study/blob/main/DL/GAN/GAN.ipynb) / [Blog Posting](https://blog.naver.com/bshlab671/222809079644)
@@ -12,3 +13,6 @@
 - [UNet](https://github.com/sihyeong671/ML-DL-study/blob/main/DL/Unet/Unet.ipynb) / [Blog Posting](https://blog.naver.com/bshlab671/222830843050)
 - [Pix2Pix](https://github.com/sihyeong671/ML-DL-study/tree/main/DL/pix2pix) / [Blog Posting](https://blog.naver.com/bshlab671/222842133527)
 - [CycleGAN](https://github.com/sihyeong671/ML-DL-study/tree/main/DL/CycleGAN) / [Blog Posting](https://blog.naver.com/bshlab671/222866368443)
+
+### Super Resolution
+- SRCNN / [Blog Posting](https://blog.naver.com/bshlab671/222885109725)
