@@ -3,7 +3,7 @@
 > Pytorch를 이용한 논문 구현
 ### General
 - BatchNorm / [Blog Posting](https://blog.naver.com/bshlab671/222854640018)
-- Adam / []
+- Adam / [Blog Posting](https://blog.naver.com/bshlab671/222887014224)
 
 ### Generative Model
 - [GAN](https://github.com/sihyeong671/ML-DL-study/blob/main/DL/GAN/GAN.ipynb) / [Blog Posting](https://blog.naver.com/bshlab671/222809079644)
